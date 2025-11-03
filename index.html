@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Richa Arora – Password Generator</title>
+<style>
+body{font-family:Inter,Arial,sans-serif;background:#f7f8fb;color:#111;padding:24px}
+.container{max-width:700px;margin:0 auto;background:#fff;padding:24px;border-radius:12px;
+box-shadow:0 4px 20px rgba(0,0,0,.1)}
+button{background:#5b6cff;color:#fff;border:0;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:600}
+.password{font-family:monospace;background:#111;color:#fff;padding:10px 14px;border-radius:8px;display:inline-block}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Password Generator</h1>
+<p>Generate strong random passwords securely in your browser.</p>
+
+<label>Password length:
+<input id="length" type="number" value="16" min="4" max="64" /></label>
+<button onclick="generate()">Generate</button>
+<p class="password" id="output">— click generate —</p>
+
+<script>
+const chars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-+=<>?";
+function generate(){
+ const len=parseInt(document.getElementById('length').value)||16;
+ let out="";const arr=new Uint32Array(len);crypto.getRandomValues(arr);
+ for(let i=0;i<len;i++){out+=chars[arr[i]%chars.length];}
+ document.getElementById('output').textContent=out;
+}
+</script>
+</div>
+</body>
+</html>
